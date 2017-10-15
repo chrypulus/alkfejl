@@ -15,3 +15,12 @@
 * foglalások (partner, időpont, szerelő, típus, megjegyzés);
 * munkalapok (partner, szerelő, anyagok és alkatrészek);
 * anyagok, alkatrészek, óradíj (név, egységár).
+
+### Szakterületi fogalomjegyzék:
+* Foglalás: időpontot, kategóriát, megjegyzést tárol, egy elvégzendő munkát ír le a rendelő részéről
+* Munkalap: partner adatait, foglalás adatait és a munkafolyatokat tárolja, egy elvégzendő munkát ír le a szerelő részéről
+* Munkafolyamatok: a munka egy részének nevét és az ehhez szükséges alkatrészeket(név, mennyiség) tárolja
+
+### Szerepkörök:
+* Partner: regisztrálás, be/kijelentkezés, időpontfoglalás, időpontmódosítás
+* Szerelő: be/kijelentkezés, munkalap nyitása, munkafolyamatok felvétele/törlése
