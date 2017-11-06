@@ -40,4 +40,8 @@ public class Reservation implements Serializable {
     
     @Column(nullable = true)
     private String comment;
+    
+    public enum Category {
+        MANDATORY, MOT, MALFUNCTION
+    }
 }

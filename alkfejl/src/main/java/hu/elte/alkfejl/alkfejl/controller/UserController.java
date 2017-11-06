@@ -1,5 +1,6 @@
 package hu.elte.alkfejl.alkfejl.controller;
 
+import hu.elte.alkfejl.alkfejl.service.UserService;
 import hu.elte.alkfejl.alkfejl.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
         try {
-            return ResponseEntity.ok(userService.login(user));
+            return ResponseEntity.ok(userService.login(user));            
         }
         catch (UserNotValidException e) {
             return ResponseEntity.badRequest().build();
