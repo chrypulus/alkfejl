@@ -1,5 +1,6 @@
 package hu.elte.alkfejl.alkfejl.entity;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +40,12 @@ public class User {
     @Column(nullable = false)
     private String password;
     
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+    
+    public enum Role {
+        PARTNER, WORKER, ADMIN, GUEST
+    }
 }
