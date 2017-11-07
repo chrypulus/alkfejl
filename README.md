@@ -40,3 +40,7 @@
 #### Worksheet:
 * /worksheet : listázás, létrehozás
 * /worksheet/{id} : kiíratás, updatelés, törlés
+
+### Adatbázis
+
+![UML](uml.jpg)
