@@ -24,3 +24,19 @@
 ### Szerepkörök:
 * Partner: regisztrálás, be/kijelentkezés, időpontfoglalás, időpontmódosítás
 * Szerelő: be/kijelentkezés, munkalap nyitása, munkafolyamatok felvétele/törlése
+
+### Végpontok:
+#### User:
+* /user/login : bejelentkezés
+* /user/register : regisztálás
+* /user/logout : kijelentkezés
+#### Reservation:
+* /reservation : listázás, létrehozás
+* /reservation/{id} : kiíratás, updatelés, törlés
+#### Parts:
+* /parts/list/{id} : kilistázza az alkatrészeket, adott worksheet szerint
+* /parts/create/{id} : hozzáad worksheethez alaktrészt
+* /parts/{id} : kiír, updatel, töröl
+#### Worksheet:
+* /worksheet : listázás, létrehozás
+* /worksheet/{id} : kiíratás, updatelés, törlés
