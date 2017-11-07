@@ -2,27 +2,39 @@ package hu.elte.alkfejl.alkfejl.service;
 
 import hu.elte.alkfejl.alkfejl.entity.Parts;
 import hu.elte.alkfejl.alkfejl.entity.Worksheet;
+import hu.elte.alkfejl.alkfejl.repository.PartsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PartsService {
-
-    public Parts read(int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    @Autowired
+    private PartsRepository partsRepository;
+    
+    public Parts read(long id) {
+        return partsRepository.findOne(id);
     }
 
     public Parts update(long id, Parts parts) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Parts currentParts = partsRepository.findOne(id);
+        
+        currentParts.setName(parts.getName());
+        currentParts.setPrice(parts.getPrice());
+        currentParts.setWsId(parts.getWsId());
+        
+        return partsRepository.save(currentParts);
     }
 
     public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        partsRepository.delete(id);
     }
 
-    public Parts create(Parts parts, Worksheet byId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Parts create(Parts parts, Worksheet worksheet) {
+        parts.setWsId(worksheet.getId());
+        return partsRepository.save(parts);
     }
 
-    public Iterable<Parts> listByWorksheet(Worksheet byId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<Parts> listByWorksheet(Worksheet worksheet) {
+        return partsRepository.findAllByWsId(worksheet.getId());
     }
     
 }

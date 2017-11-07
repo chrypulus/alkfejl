@@ -1,6 +1,8 @@
 package hu.elte.alkfejl.alkfejl.service;
 
 import hu.elte.alkfejl.alkfejl.entity.User;
+import hu.elte.alkfejl.alkfejl.exception.UserNotValidException;
+import hu.elte.alkfejl.alkfejl.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

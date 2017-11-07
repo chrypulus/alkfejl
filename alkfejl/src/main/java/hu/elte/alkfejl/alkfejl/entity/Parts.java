@@ -26,4 +26,7 @@ public class Parts implements Serializable {
     
     @Column(nullable = false)
     private int price;
+    
+    @Column(nullable = false)
+    private long wsId;
 }

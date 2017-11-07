@@ -2,6 +2,7 @@ package hu.elte.alkfejl.alkfejl.controller;
 
 import hu.elte.alkfejl.alkfejl.service.UserService;
 import hu.elte.alkfejl.alkfejl.entity.User;
+import hu.elte.alkfejl.alkfejl.exception.UserNotValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
