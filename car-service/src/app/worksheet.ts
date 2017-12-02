@@ -1,8 +1,6 @@
 import { User } from "./user";
 import { Part } from "./part";
 
-// munkalapok (partner, szerelő, anyagok és alkatrészek);
-
 export class Worksheet{
     partner : User;
     worker : User;
