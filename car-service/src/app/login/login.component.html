@@ -1,0 +1,26 @@
+<div *ngIf="!loggedin" class = "container">
+  <h1>Bejelentkezés</h1>
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label from="username">Felhasználó neve</label>
+      <input type="text" class="form-control" id="username" required
+      [(ngModel)]="model.username" name = "username" #username="ngModel">
+      <div [hidden] = "username.valid || username.pristine" class = "alert alert-warning">
+        Felhasználó neve szükséges 
+      </div>  
+    </div>
+    <div class="form-group">
+      <label for="password">Jelszó</label>
+      <input type="text" class="form-control" id="password" required
+      [(ngModel)]="model.password" name = "password" #password="ngModel">
+      <div [hidden] = "password.valid || password.pristine" class = "alert alert-warning">
+          Jelszó szükséges
+      </div> 
+    </div>
+    <button type="submit" class = "btn btn-success" [disabled]="!userForm.form.valid">OK</button>
+    <div *ngIf="loginError" class = "alert alert-danger">
+        Rossz felhasználónév vagy jelszó!
+    </div>
+  </form>
+</div>

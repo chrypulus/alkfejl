@@ -1,0 +1,17 @@
+<ul id="months">
+  <li *ngFor = "let month of months" id = "month">
+    <button (click) = "changeMonth(month)">{{month}}</button>
+  </li>
+</ul>
+<div *ngIf="currentReservations.length == 0">
+    <strong style="text-align: center;">Erre a hónapra még nincsenek időpontok</strong>
+</div>
+<ul id = "reservations">
+  <li *ngFor = "let res of currentReservations" id="reservation">
+    <strong>{{months[currentMonth] + " "}} {{res.getDate()}}</strong> - {{res.getCategory() | uppercase}}
+      <div id="details">
+        ÜGYFÉL: {{res.partner.name}} <br>
+        SZERELŐ: {{res.worker.name}}
+      </div>
+  </li>
+</ul>

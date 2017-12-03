@@ -16,4 +16,18 @@ export class Reservation{
         this.category = category;
         this.comment = comment;
     }
+    getCategory() : string {
+        if(this.category == Category.MALFUNCTION)return "Meghibásodás";
+        if(this.category == Category.MANDATORY)return "Kötelező szervíz";
+        if(this.category == Category.MOT)return "Műszaki vizsga";
+    }
+    getDate() : string {
+        var day;
+        var hours;
+        var minutes;
+        day = this.appointment.getDay() < 10 ? "0" + this.appointment.getDay() : "" + this.appointment.getDay();
+        hours = this.appointment.getHours() < 10 ? "0" + this.appointment.getHours() : "" + this.appointment.getHours();
+        minutes = this.appointment.getMinutes() < 10 ? "0" + this.appointment.getMinutes() : "" + this.appointment.getMinutes();
+        return day + ". " +hours + ":" + minutes;
+    }
 }

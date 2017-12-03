@@ -1,0 +1,63 @@
+
+h2{
+    text-align: center;
+    font-size: 36px;
+}
+
+strong{
+    color: gold;
+    font-size: 20px;
+}
+
+#months{
+    list-style: none;
+    list-style-type:none;
+    display:flex;
+    justify-content: center;
+}
+
+#month{
+    display: list-item;
+    margin: 0 3px;
+    padding: 5px 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+button {
+    margin: 1px auto 1px auto;
+    padding: 10px 35px;
+    background-color: white; 
+    color: black; 
+    border: 2px solid cadetblue;
+}
+
+button:hover {
+    background-color: cadetblue;
+    color: white;
+}
+
+#reservation{
+    list-style-type: none;
+    color: white;
+    background-color: cadetblue;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-size: 16px;
+    border-right: 10px solid darkgrey;
+    border-bottom: 2px solid darkgrey;
+    border-left: 2px solid darkgrey;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+#reservations{
+    font-size: 20px;
+}
+
+.months button{
+    font-size: 36px;
+}
