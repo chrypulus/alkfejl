@@ -24,3 +24,9 @@
     </div>
   </form>
 </div>
+
+<div *ngIf="loggedin" class = "container">
+  <div class="jumbotron">
+    <h1>Üdvözöllek {{getUserName()}}!</h1>  
+  </div>
+</div>

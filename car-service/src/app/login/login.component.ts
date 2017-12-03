@@ -25,4 +25,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  getUserName() : string {
+    var username;
+    this.userService.getUserName().subscribe(name => username = name);
+    return username;
+  }
+
+  getUserType() : Role {
+    var type;
+    this.userService.getUserType().subscribe(role => type = role);
+    return type;
+  }
 }

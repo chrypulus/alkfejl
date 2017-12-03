@@ -6,10 +6,16 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class ReservationsService {
+  private reservations : Reservation[];
 
-  constructor() { }
+  private load(){
+    this.reservations = RESERVATIONS;
+  }
+  constructor() {
+    this.load();
+  }
 
   getReservations() : Observable<Reservation[]> {
-    return of(RESERVATIONS);
+    return of(this.reservations);
   }
 }

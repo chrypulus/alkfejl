@@ -1,0 +1,11 @@
+<div class="list-group">
+    <template class="list-group-item" *ngFor="let res of reservations">
+      <strong>{{res.getDate()}}</strong>
+      <div class="alert alert-success alert-info">
+        <strong>Név: </strong>{{res.partner.name}}<br>
+        <strong>Telefonszám: </strong>{{res.partner.phone}}<br>
+        <strong>Kategória: </strong>{{res.getCategory()}}<br>
+        <strong>Megjegyzés: </strong>{{res.comment}}
+      </div>
+    </template>
+</div>

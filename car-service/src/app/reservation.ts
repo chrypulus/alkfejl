@@ -22,12 +22,13 @@ export class Reservation{
         if(this.category == Category.MOT)return "Műszaki vizsga";
     }
     getDate() : string {
+        let months = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"];
         var day;
         var hours;
         var minutes;
         day = this.appointment.getDay() < 10 ? "0" + this.appointment.getDay() : "" + this.appointment.getDay();
         hours = this.appointment.getHours() < 10 ? "0" + this.appointment.getHours() : "" + this.appointment.getHours();
         minutes = this.appointment.getMinutes() < 10 ? "0" + this.appointment.getMinutes() : "" + this.appointment.getMinutes();
-        return day + ". " +hours + ":" + minutes;
+        return this.appointment.getFullYear() + ". " +months[this.appointment.getMonth()] + " " + day + ". " +hours + ":" + minutes;
     }
 }

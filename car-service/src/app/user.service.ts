@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {USERS} from './mock/mock-users';
 import { User } from './user';
+import { Role } from './role';
 
 @Injectable()
 export class UserService {
@@ -30,8 +31,20 @@ export class UserService {
     this.currentUser = null;
   }
 
+  isLoggedIn() : boolean {
+    return this.currentUser != null;
+  }
+
   getCurrentUser() : Observable<User> {
     return of(this.currentUser);
+  }
+
+  getUserName() : Observable<string> {
+    return of(this.currentUser.name);
+  }
+
+  getUserType() : Observable<Role> {
+    return of(this.currentUser.role);
   }
 
   registerUser(newUser : User) : boolean {

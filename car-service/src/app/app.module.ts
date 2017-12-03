@@ -10,6 +10,9 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { ListComponent } from './list/list.component';
 
 
 @NgModule({
@@ -18,12 +21,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     CalendarComponent,
     ReservationComponent,
     LoginComponent,
-    NavBarComponent
+    NavBarComponent,
+    HomeComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [ReservationsService, UserService],
   bootstrap: [AppComponent]
