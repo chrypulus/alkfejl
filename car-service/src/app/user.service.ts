@@ -47,14 +47,16 @@ export class UserService {
     return of(this.currentUser.role);
   }
 
-  registerUser(newUser : User) : boolean {
+  registerUser(newUser : User) : Observable<boolean> {
+    let ok = true;
     for(let user of this.users){
       if(user.username == newUser.username){
-        return false;
+        ok = false;
+        break;
       }
     }
     this.users.push(newUser);
-    return true;
+    return of(ok);
   }
 
 }

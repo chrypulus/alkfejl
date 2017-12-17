@@ -10,9 +10,10 @@ import { log } from 'util';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model = new User("", "", "", -1, "", "", Role.PARTNER);
+  model = new User("", "", "", -1, "", "", null);
   loginError = false;
   loggedin = false;
+
   onSubmit() : void {
     if(!this.userService.login(this.model.username, this.model.password)){
       this.loginError = true;

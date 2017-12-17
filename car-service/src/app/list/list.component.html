@@ -7,5 +7,21 @@
         <strong>Kategória: </strong>{{res.getCategory()}}<br>
         <strong>Megjegyzés: </strong>{{res.comment}}
       </div>
+      <div class = "alert alert-danger" *ngIf = "getWSByReservation(res) == null">
+          <strong>Munkalap információ: </strong>
+          Még nem készült munkalap a foglaláshoz.
+      </div>
+      <div class = "alert alert-info" *ngIf = "getWSByReservation(res) != null">
+        <strong>Munkalap információ: </strong> <br>
+        <ul class="list-group">
+          <li class="list-group-item justify-content-between" *ngFor = "let part of getWSByReservation(res).parts">
+            {{part.name}}
+            <span class="badge badge-default badge-pill">{{"" + part.price + " Forint"}}</span>
+          </li>
+        </ul>
+        <div class="list-group-item">
+          Összesen: <strong>{{getWSByReservation(res).getSum()}}</strong>
+        </div>
+      </div>
     </template>
 </div>

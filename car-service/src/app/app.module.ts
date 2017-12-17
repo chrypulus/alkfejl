@@ -13,6 +13,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
+import { WorksheetComponent } from './worksheet/worksheet.component';
+import { WorksheetService } from './worksheet.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import { ListComponent } from './list/list.component';
     LoginComponent,
     NavBarComponent,
     HomeComponent,
-    ListComponent
+    ListComponent,
+    WorksheetComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ import { ListComponent } from './list/list.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ReservationsService, UserService],
+  providers: [ReservationsService, UserService, WorksheetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,7 +5,9 @@
       </div>
       <ul class="nav navbar-nav" *ngIf="!userService.isLoggedIn()">
           <li class="active" *ngIf="!userService.isLoggedIn()"><a routerLink="/login">Bejelentkezés</a></li>
-          
+      </ul>
+      <ul class="nav navbar-nav" *ngIf="!userService.isLoggedIn()">
+          <li class="active" *ngIf="!userService.isLoggedIn()"><a routerLink="/registration">Regisztráció</a></li>
       </ul>
       <ul class="nav navbar-nav" *ngIf="userService.isLoggedIn()">
           <li class="active"><a routerLink="/home" (click)="userService.logout()">Kijelentkezés</a></li>

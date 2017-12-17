@@ -4,6 +4,8 @@ import { UserService } from '../user.service';
 import { User } from '../user';
 import { Reservation } from '../reservation';
 import { log } from 'util';
+import { WorksheetService } from '../worksheet.service';
+import { Worksheet } from '../worksheet';
 
 @Component({
   selector: 'app-list',
@@ -13,8 +15,10 @@ import { log } from 'util';
 export class ListComponent implements OnInit {
   user : User;
   reservations : Reservation[];
-  constructor(private reservationService : ReservationsService, private userService : UserService) {
+  worksheets : Worksheet[];
+  constructor(private reservationService : ReservationsService, private userService : UserService, private worksheetService : WorksheetService) {
     this.getReservations();
+    this.getUser();
   }
 
   getReservations() : Reservation[] {
@@ -26,6 +30,14 @@ export class ListComponent implements OnInit {
   getUser() : User {
     this.userService.getCurrentUser().subscribe(currentUser => this.user = currentUser);
     return this.user;
+  }
+
+  getWorksheets() : void {
+    this.worksheetService.getWorksheets().subscribe(worksheets => this.worksheets = worksheets);
+  }
+
+  getWSByReservation(res : Reservation) : Worksheet {
+    return this.worksheetService.getWSbyReservation(res);
   }
 
   ngOnInit() {

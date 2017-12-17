@@ -1,0 +1,51 @@
+<div class = "container">
+    <h1>Regisztráció</h1>
+  
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label from="username">Felhasználónév</label>
+        <input type="text" class="form-control" id="username" required autofocus
+        [(ngModel)]="model.username" name = "username" #username="ngModel" placeholder="felhasználónév"
+        minlength="5">
+        <div [hidden] = "username.valid || username.pristine" class = "alert alert-warning">
+          Legalább 5 karakter kell!
+        </div>  
+      </div>
+      <div class="form-group">
+        <label from="username">Teljes név</label>
+        <input type="text" class="form-control" id="name" required placeholder="vezetéknév keresztnév" autocomplete="off" minlength="1"
+        [(ngModel)]="model.name" name = "name" #name="ngModel">
+        <div [hidden] = "name.valid || name.pristine" class = "alert alert-warning">
+          A teljes név megadása kötelező!
+        </div>  
+      </div>
+      <div class="form-group">
+          <label from="address">Cím</label>
+          <input type="text" class="form-control" id="address" required placeholder="település utca házszám" minlength="1" autocomplete="off"
+          [(ngModel)]="model.address" name = "address" #address="ngModel">
+          <div [hidden] = "address.valid || address.pristine" class = "alert alert-warning">
+            A cím megadása kötelező!
+          </div>  
+      </div>
+      <div class="form-group">
+          <label from="username">Telefonszám</label>
+          <input type="tel" class="form-control" id="phone" required ng-required="number" pattern="[0-9]{11}" placeholder="06301234567" autocomplete="off"
+          [(ngModel)]="model.phone" name = "phone" #phone="ngModel">
+          <div [hidden] = "phone.valid || phone.pristine" class = "alert alert-warning">
+            Hibás telefonszám!
+        </div>  
+      </div>
+      <div class="form-group">
+        <label form="password">Jelszó</label>
+        <input type="password" class="form-control" id="password" required minlength="6" placeholder = "jelszó" autocomplete="off"
+        [(ngModel)]="model.password" name = "password" #password="ngModel">
+        <div [hidden] = "password.valid || password.pristine" class = "alert alert-warning">
+            Jelszónak legalább 6 karaktert kell tartalmaznia!
+        </div> 
+      </div>
+      <button type="submit" class = "btn btn-success" [disabled]="!userForm.form.valid">OK</button>
+      <div [hidden]="this.success" class = "alert alert-danger">
+          Már foglalt ez a felhasználónév
+      </div>
+    </form>
+  </div>
