@@ -43,5 +43,4 @@
 
 ### Adatbázis
 
-![UML](uml.jpg)
 
