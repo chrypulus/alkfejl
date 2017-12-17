@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,6 +29,6 @@ public class Worksheet implements Serializable {
     @OneToOne(targetEntity = User.class)
     private User worker;
     
-    @OneToMany(targetEntity = Parts.class)
+    @ManyToMany(mappedBy = "worksheet")
     private List<Parts> parts;
 }

@@ -3,6 +3,7 @@ package hu.elte.alkfejl.alkfejl.service;
 import hu.elte.alkfejl.alkfejl.entity.Parts;
 import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.repository.PartsRepository;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PartsService {
@@ -14,14 +15,14 @@ public class PartsService {
         return partsRepository.findOne(id);
     }
 
-    public Parts update(long id, Parts parts) {
-        Parts currentParts = partsRepository.findOne(id);
+    public Parts update(long id, Parts part) {
+        Parts currentPart = partsRepository.findOne(id);
         
-        currentParts.setName(parts.getName());
-        currentParts.setPrice(parts.getPrice());
-        currentParts.setWsId(parts.getWsId());
+        currentPart.setName(part.getName());
+        currentPart.setPrice(part.getPrice());
+        currentPart.setWorksheet(part.getWorksheet());
         
-        return partsRepository.save(currentParts);
+        return partsRepository.save(currentPart);
     }
 
     public void delete(long id) {
@@ -29,12 +30,14 @@ public class PartsService {
     }
 
     public Parts create(Parts parts, Worksheet worksheet) {
-        parts.setWsId(worksheet.getId());
+        ArrayList<Worksheet> ws = new ArrayList<Worksheet>();
+        ws.add(worksheet);
+        parts.setWorksheet(ws);
         return partsRepository.save(parts);
     }
 
     public Iterable<Parts> listByWorksheet(Worksheet worksheet) {
-        return partsRepository.findAllByWsId(worksheet.getId());
+        return partsRepository.findAllByWorksheet(worksheet);
     }
     
 }
