@@ -9,13 +9,7 @@ export class Reservation{
     worker : User;
     category : Category;
     comment : string;
-    constructor(partner : User, appointment : Date, worker : User, category : Category, comment : string){
-        this.partner = partner;
-        this.appointment = appointment;
-        this.worker = worker;
-        this.category = category;
-        this.comment = comment;
-    }
+    id : number;
     getCategory() : string {
         if(this.category == Category.MALFUNCTION)return "Meghibásodás";
         if(this.category == Category.MANDATORY)return "Kötelező szervíz";

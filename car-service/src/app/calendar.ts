@@ -3,7 +3,7 @@ export class Calendar{
     private days : Date[];
     private month : number;
     private months = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"];
-    private day = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
+    private day = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
     constructor(){
         this.month = new Date().getMonth();
         this.updateCalendar();
@@ -33,6 +33,6 @@ export class Calendar{
     }
 
     getDayString(d : Date) : string {
-        return this.getMonth() + " "+  d.getDate() + ". " + this.day[d.getDay() - 1];
+        return this.months[d.getMonth()] + " "+  d.getDate() + ". " + this.day[d.getDay()];
     }
 }

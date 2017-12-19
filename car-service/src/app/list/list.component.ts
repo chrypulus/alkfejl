@@ -6,6 +6,9 @@ import { Reservation } from '../reservation';
 import { log } from 'util';
 import { WorksheetService } from '../worksheet.service';
 import { Worksheet } from '../worksheet';
+import { Role } from '../role';
+import { Category } from '../category';
+import { Calendar } from '../calendar';
 
 @Component({
   selector: 'app-list',
@@ -16,15 +19,24 @@ export class ListComponent implements OnInit {
   user : User;
   reservations : Reservation[];
   worksheets : Worksheet[];
+  cal : Calendar = new Calendar();
   constructor(private reservationService : ReservationsService, private userService : UserService, private worksheetService : WorksheetService) {
     this.getReservations();
     this.getUser();
   }
 
-  getReservations() : Reservation[] {
+  getReservations() : void {
     this.reservationService.getReservations().subscribe(reservations => this.reservations = reservations);
-    log(""+this.reservations.length);
-    return this.reservations;
+  }
+
+  filterByUser() : Reservation[] {
+    let r = [];
+    for(let res of this.reservations){
+      if((this.user.role == 0 && res.partner == this.user) ||(this.user.role==1 && res.worker == this.user)){
+        r.push(res);
+      }
+    }
+    return r;
   }
 
   getUser() : User {

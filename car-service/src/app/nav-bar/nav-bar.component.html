@@ -3,16 +3,14 @@
       <div class="navbar-header">
         <a class="navbar-brand" routerLink="/home">Varga-Kaunitz Autószerelő Rt.</a>
       </div>
-      <ul class="nav navbar-nav" *ngIf="!userService.isLoggedIn()">
+      <ul class="nav navbar-nav" *ngIf="user==null">
           <li class="active" *ngIf="!userService.isLoggedIn()"><a routerLink="/login">Bejelentkezés</a></li>
-      </ul>
-      <ul class="nav navbar-nav" *ngIf="!userService.isLoggedIn()">
           <li class="active" *ngIf="!userService.isLoggedIn()"><a routerLink="/registration">Regisztráció</a></li>
       </ul>
       <ul class="nav navbar-nav" *ngIf="userService.isLoggedIn()">
           <li class="active"><a routerLink="/home" (click)="userService.logout()">Kijelentkezés</a></li>
-          <li><a routerLink="/list">Időpontok listázása</a></li>
-          <li><a routerLink="/newreservation">Új foglalás</a></li>
+          <li><a routerLink="/list">Foglalások listázása</a></li>
+          <li *ngIf="user.role==0"><a routerLink="/newreservation">Új foglalás</a></li>
       </ul>
     </div>
   </nav>

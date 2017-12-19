@@ -7,12 +7,18 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class ReservationsService {
   private reservations : Reservation[];
-
+  private id = 0;
+  generateId() : number {
+    this.id++;
+    return this.id;
+  }
   private load(){
-    this.reservations = RESERVATIONS;
+    for(let r of RESERVATIONS){
+      this.saveReservation(r);
+    }
   }
   constructor() {
-    this.load();
+    //this.load();
   }
 
   getReservations() : Observable<Reservation[]> {
@@ -20,6 +26,13 @@ export class ReservationsService {
   }
 
   saveReservation(r : Reservation) : void {
-    this.reservations.push(new Reservation(r.partner, r.appointment, r.worker, r.category, r.comment));
+    let res = new Reservation();
+    res.partner = r.partner;
+    res.worker = r.worker;
+    res.appointment = r.appointment;
+    res.category = r.category;
+    res.comment = r.comment;
+    res.id = this.generateId();
+    this.reservations.push(res);
   }
 }

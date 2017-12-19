@@ -1,5 +1,7 @@
 //(kötelező szerviz, műszaki vizsga, illetve meghibásodás)
 
 export enum Category{
-    MANDATORY, MOT, MALFUNCTION
+    MANDATORY = "Kötelező szervíz",
+    MOT = "Műszaki vizsga",
+    MALFUNCTION = "Meghibásodás"
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { User } from '../user';
+import { Role } from '../role';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,8 +9,10 @@ import { UserService } from '../user.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
-  constructor(private userService : UserService) { }
+  private user : User;
+  constructor(private userService : UserService) {
+    this.userService.getCurrentUser().subscribe(currentUser => this.user = currentUser);
+  }
 
   ngOnInit() {
   }

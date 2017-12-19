@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarComponent},
   { path: 'list', component: ListComponent},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'newreservation', component: NewReservationComponent}
+  { path: 'newreservation', component: NewReservationComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 
 ];
 

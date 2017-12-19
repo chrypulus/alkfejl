@@ -1,27 +1,17 @@
-<div class="list-group">
-    <template class="list-group-item" *ngFor="let res of reservations">
-      <strong>{{res.getDate()}}</strong>
-      <div class="alert alert-success alert-info">
-        <strong>Név: </strong>{{res.partner.name}}<br>
-        <strong>Telefonszám: </strong>{{res.partner.phone}}<br>
-        <strong>Kategória: </strong>{{res.getCategory()}}<br>
-        <strong>Megjegyzés: </strong>{{res.comment}}
-      </div>
-      <div class = "alert alert-danger" *ngIf = "getWSByReservation(res) == null">
-          <strong>Munkalap információ: </strong>
-          Még nem készült munkalap a foglaláshoz.
-      </div>
-      <div class = "alert alert-info" *ngIf = "getWSByReservation(res) != null">
-        <strong>Munkalap információ: </strong> <br>
-        <ul class="list-group">
-          <li class="list-group-item justify-content-between" *ngFor = "let part of getWSByReservation(res).parts">
-            {{part.name}}
-            <span class="badge badge-default badge-pill">{{"" + part.price + " Forint"}}</span>
-          </li>
-        </ul>
-        <div class="list-group-item">
-          Összesen: <strong>{{getWSByReservation(res).getSum()}}</strong>
-        </div>
-      </div>
-    </template>
+<div class="container">
+
+  <div class="row" *ngFor="let r of filterByUser()">
+    <ul class="list-group">
+      <li class="list-group-item active"><strong> Foglaló neve:</strong> {{r.partner.name}}</li>
+      <li class="list-group-item"><strong>Dolgozó neve:</strong> {{r.worker.name}}</li>
+      <li class="list-group-item"><strong>Foglalt időpont: </strong>{{cal.getDayString(r.appointment)}}</li>
+      <li class="list-group-item"><strong>Kategória: </strong>{{r.category}}</li>
+      <li class="list-group-item"><strong>Megjegyzés:</strong> {{r.comment}}</li>
+      <button type="button" class="btn btn-secondary">Módosítás</button>
+      <button type="button" class="btn btn-secondary">Törlés</button>
+      <button type="button" class="btn btn-secondary">Munkalap elkészítése</button>
+    </ul>
+    
+  </div>
+
 </div>

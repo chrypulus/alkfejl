@@ -17,6 +17,8 @@ import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetService } from './worksheet.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { NewReservationComponent } from './new-reservation/new-reservation.component';
+import { ReslistComponent } from './reslist/reslist.component';
+import { NewwsComponent } from './newws/newws.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { NewReservationComponent } from './new-reservation/new-reservation.compo
     ListComponent,
     WorksheetComponent,
     RegistrationComponent,
-    NewReservationComponent
+    NewReservationComponent,
+    ReslistComponent,
+    NewwsComponent
   ],
   imports: [
     BrowserModule,
