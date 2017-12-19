@@ -16,6 +16,7 @@ import { ListComponent } from './list/list.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetService } from './worksheet.service';
 import { RegistrationComponent } from './registration/registration.component';
+import { NewReservationComponent } from './new-reservation/new-reservation.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RegistrationComponent } from './registration/registration.component';
     HomeComponent,
     ListComponent,
     WorksheetComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NewReservationComponent
   ],
   imports: [
     BrowserModule,

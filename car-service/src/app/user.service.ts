@@ -47,6 +47,20 @@ export class UserService {
     return of(this.currentUser.role);
   }
 
+  getUsers() : Observable<User[]> {
+    return of(this.users);
+  }
+
+  getWorkers() : Observable<User[]> {
+    let workers = [];
+    for(let worker of this.users){
+      if(worker.role == Role.WORKER){
+        workers.push(worker);
+      }
+    }
+    return of(workers);
+  }
+
   registerUser(newUser : User) : Observable<boolean> {
     let ok = true;
     for(let user of this.users){

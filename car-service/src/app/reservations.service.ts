@@ -18,4 +18,8 @@ export class ReservationsService {
   getReservations() : Observable<Reservation[]> {
     return of(this.reservations);
   }
+
+  saveReservation(r : Reservation) : void {
+    this.reservations.push(new Reservation(r.partner, r.appointment, r.worker, r.category, r.comment));
+  }
 }

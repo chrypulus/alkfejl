@@ -1,0 +1,50 @@
+<div class="container">
+    <h2 *ngIf = "saved==false">Új foglalás</h2>
+    <h2 *ngIf = "saved==true">Sikeres foglalás</h2>
+  <div *ngIf="ok == false">
+    <h3>Válasszon dolgozót és időpontot!</h3>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button *ngFor="let w of getWorkers()" type="button" class="btn btn-secondary" (click)="setWorker(w)">{{w.name}}</button>
+    </div>
+    <div *ngIf="model.worker != null">
+      <h3> {{model.worker.name}} szabad napjai a hónapban:</h3>
+      <div class="btn-group">
+        <button *ngFor="let d of freeDays()" type="button" class="btn btn-primary" (click)="calendarClicked(d)" 
+        style="padding: 16px 32px;font-size: 16px;border-radius: 0px;width: 225px;height: 60px;">{{cal.getDayString(d)}}
+        </button>
+      </div>
+      <h3 *ngIf="selectedDay != null">Választott nap:{{" "+selectedDay.toLocaleDateString()}}</h3>
+      <p><button  type="button" class="btn btn-secondary" (click)="ok = true">Tovább</button></p>
+    </div>
+  </div>
+  <div *ngIf="ok == true">
+  <div *ngIf="model.category == null" class="btn-group" role="group">
+    <h3>Válasszon kategóriát!</h3>
+    <button type="button" class="btn btn-primary" (click)="setCategory(0)">Kötelező szervíz</button>
+    <button type="button" class="btn btn-primary" (click)="setCategory(1)">Műszaki vizsga</button>
+    <button type="button" class="btn btn-primary" (click)="setCategory(2)">Meghibásodás</button>
+  </div>
+  <div *ngIf="model.category != null">
+    <form *ngIf="saved == false">
+      <div class="form-group">
+        <label for="comment">Megjegyzés</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" [(ngModel)]="model.comment" name = "comment" #comment="ngModel" rows="3"></textarea>
+      </div>
+      <p><button  type="button" class="btn btn-secondary" (click)="save()">Foglalás mentése</button></p>
+      <p><a routerLink="/list">Mégse</a></p>
+    </form>
+    <div *ngIf="saved==true">
+    <ul class="list-group">
+      <h3>A lefoglalt időpont adatai</h3>
+      <li class="list-group-item active">Foglaló neve: {{model.partner.name}}</li>
+      <li class="list-group-item">Dolgozó neve: {{model.worker.name}}</li>
+      <li class="list-group-item">Foglalt időpont: {{cal.getDayString(model.appointment)}}</li>
+      <li class="list-group-item">Kategória: {{getCategory()}}</li>
+      <li class="list-group-item">Megjegyzés: </li>
+    </ul>
+    <p><a routerLink="/list">Befejezés</a></p>
+    </div>
+    </div>
+  </div>
+</div>
+

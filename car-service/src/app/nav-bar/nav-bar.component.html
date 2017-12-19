@@ -12,6 +12,7 @@
       <ul class="nav navbar-nav" *ngIf="userService.isLoggedIn()">
           <li class="active"><a routerLink="/home" (click)="userService.logout()">Kijelentkezés</a></li>
           <li><a routerLink="/list">Időpontok listázása</a></li>
+          <li><a routerLink="/newreservation">Új foglalás</a></li>
       </ul>
     </div>
   </nav>
