@@ -5,7 +5,11 @@ import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.repository.WorksheetRepository;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
+@Service
+@SessionScope
 public class WorksheetService {
 
     @Autowired
@@ -29,16 +33,16 @@ public class WorksheetService {
         worksheetRepository.delete(id);
     }
     
-    public Worksheet create(Worksheet worksheet, User user) {
-        worksheet.setWorker(user);
+    public Worksheet create(Worksheet worksheet, User worker) {
+        worksheet.setWorker(worker);
         return worksheetRepository.save(worksheet);
     }
 
-    public Iterable<Worksheet> listByName(User user) {
-        User.Role role = user.getRole();
+    public Iterable<Worksheet> listByName(User partner) {
+        User.Role role = partner.getRole();
         if (null != role) switch (role) {
             case PARTNER:
-                return worksheetRepository.findAllByUser(user);
+                return worksheetRepository.findAllByPartner(partner);
             case ADMIN:
                 return worksheetRepository.findAll();
             case WORKER:

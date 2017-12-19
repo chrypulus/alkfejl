@@ -6,7 +6,11 @@ import hu.elte.alkfejl.alkfejl.entity.User.Role;
 import hu.elte.alkfejl.alkfejl.repository.ReservationRepository;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
+@Service
+@SessionScope
 public class ReservationService {
 
     @Autowired
@@ -33,16 +37,16 @@ public class ReservationService {
         reservationRepository.delete(id);
     }
 
-    public Reservation create(Reservation reservation, User user) {
-        reservation.setPartner(user);
+    public Reservation create(Reservation reservation, User partner) {
+        reservation.setPartner(partner);
         return reservationRepository.save(reservation);
     }
 
-    public Iterable<Reservation> listByRole(User user) {
-        Role role = user.getRole();
+    public Iterable<Reservation> listByRole(User partner) {
+        Role role = partner.getRole();
         if (null != role) switch (role) {
             case PARTNER:
-                return reservationRepository.findAllByUser(user);
+                return reservationRepository.findAllByPartner(partner);
             case ADMIN:
                 return reservationRepository.findAll();
             case WORKER:
