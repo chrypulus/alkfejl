@@ -5,5 +5,5 @@ import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import org.springframework.data.repository.CrudRepository;
 
 public interface WorksheetRepository extends CrudRepository<Worksheet, Long>{
-    Iterable<Worksheet> findAllByUser(User user);
+    Iterable<Worksheet> findAllByPartner(User partner);
 }
