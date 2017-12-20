@@ -1,0 +1,6 @@
+<form #form="ngForm" (ngSubmit)="submit(form)" (reset)="reset()">
+  <div class="form-group">
+
+  <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Mentés</button>
+  <button type="reset" mat-button>Mégse</button>
+</form>

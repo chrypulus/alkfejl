@@ -1,6 +1,5 @@
-<form #f="ngForm" (ngSubmit)="submit()" (reset)="reset()">
-    <h2>Új munkalap készítése</h2>
-    
-    <button type="submit" mat-raised-button color="primary" [disabled]="!f.valid">Mentés</button>
-    <button type="reset" mat-button>Mégse</button>
-  </form>
+<ws-form
+[ws]="ws"
+(onSubmit)="onFormSubmit($event)"
+(onReset)="onFormReset()"
+></ws-form>

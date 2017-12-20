@@ -13,6 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class UserService {
+  redirectUrl: string;
   userUrl = "http://localhost:4200/api/user";
   isLoggedIn : boolean = false;
   user : User;

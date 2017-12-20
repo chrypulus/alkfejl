@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from './reservation';
-import { RESERVATIONS } from './mock/mock-reservations';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -24,7 +23,7 @@ export class ReservationsService {
   }
 
   getReservation( id : number ) : Observable<Reservation> {
-    return this.http.get<Reservation>(`http://localhost:4200/api/reservation/${r.id}`);
+    return this.http.get<Reservation>(`http://localhost:4200/api/reservation/${id}`);
   }
 
   updateReservation( r : Reservation ) : Observable<Reservation> {

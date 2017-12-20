@@ -22,9 +22,9 @@
           <td>{{ r.category }}</td>
           <td>{{ r.comment }}</td>
           <td>
-            <!--a *ngIf="userService.user.role === 'PARTNER'" mat-icon-button [routerLink]="['/', r.id, 'edit']"-->
-              <mat-icon>edit</mat-icon>
-            <!--/a-->
+            <a *ngIf="userService.user.role === 'PARTNER'" mat-icon-button routerLink="/reservation/{{r.id}}">
+              <mat-icon>Részletek</mat-icon>
+            </a>
             <!--button *ngIf="authService.user.role === 'ADMIN'" mat-icon-button color="warn"-->
               <mat-icon>delete</mat-icon>
             <!--/button-->

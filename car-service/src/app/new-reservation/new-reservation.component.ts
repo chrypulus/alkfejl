@@ -47,6 +47,7 @@ export class NewReservationComponent implements OnInit {
   notReservedDay = (d: Date): boolean => {
     //const day = d.getDate();
     //const month = d.getMonth();
+    if(d.getTime() < new Date().getTime())return false;
     if(this.model.worker == null)return false;
     for(let fr of this.filteredReservations){
       if(fr.appointment == d)return false;
@@ -55,6 +56,7 @@ export class NewReservationComponent implements OnInit {
   }
 
   submit() : void {
+    this.model.wsid = -1;
     let ob = this.reservationsService.addReservation(this.model);
     ob.subscribe(reservation => this.location.back());
   }

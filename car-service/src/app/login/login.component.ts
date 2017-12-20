@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     try {
       this.message = "Bejelentkezés folyamatban...";
       await this.userService.login(this.model);
-      this.router.navigateByUrl("/home");
+      //this.router.navigateByUrl("/home");
     }
     catch (err) {
       this.message = "A bejelentkezés nem sikerült!";
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     }
   }
   constructor(private userService : UserService,
-              private router : Router) { }
+              private router : Router
+            ) { }
 
   ngOnInit() {
   }

@@ -12,7 +12,6 @@ import { UserService } from './user.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { ListComponent } from './list/list.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetService } from './worksheet.service';
 import { RegistrationComponent } from './registration/registration.component';
@@ -25,6 +24,7 @@ import { MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule,
   MatButtonToggleModule, MatListModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { WsFormComponent } from './ws-form/ws-form.component';
 
 @NgModule({
   declarations: [
@@ -34,20 +34,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     LoginComponent,
     NavBarComponent,
     HomeComponent,
-    ListComponent,
     WorksheetComponent,
     RegistrationComponent,
     NewReservationComponent,
     ReslistComponent,
-    NewwsComponent
-    
+    NewwsComponent,
+    WsFormComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
@@ -58,7 +56,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatListModule,
     MatButtonToggleModule,
     FormsModule,
-    HttpClientModule
   ],
   providers: [ReservationsService, UserService, WorksheetService, PartsService],
   bootstrap: [AppComponent]

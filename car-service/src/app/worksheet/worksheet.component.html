@@ -1,8 +1,52 @@
-<template *ngFor = "let res of reservations">
-    <h3>{{reservation.appointment}}</h3>
-    <div>
-      <span>{{reservation.getCategory() | uppercase}}</span>
-      <span>Ügyfél neve: {{reservation.partner.name}}</span>
-      <span>Szerelő neve: {{reservation.worker.name}}</span>
-    </div>
-</template>
+<div class="row">
+  A foglalás adatai:
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Dolgozó</th>
+          <th scope="col">Partner</th>
+          <th scope="col">Időpont</th>
+          <th scope="col">Kategória</th>
+          <th scope="col">Megjegyzés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{ r.id }}</th>
+          <td>{{ r.worker.name }}</td>
+          <td>{{ r.partner.name }}</td>
+          <td>{{ r.appointment.toLocaleString() }}</td>
+          <td>{{ r.category }}</td>
+          <td>{{ r.comment }}</td>
+          <td>
+            <button *ngIf="userService.user.role == 1" mat-icon-button color="warn" (click)="deleteReservation()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-list *ngIf="r.wsid != -1">
+      <mat-list-item *ngFor="let part of parts">
+        <h3 matLine> {{part.name}} </h3>
+        <p matLine>
+          <span> {{part.price}} </span>
+          <button *ngIf="userService.user.role == 1" (click)="deletePart(part)"> Törlés </button>
+        </p>
+      </mat-list-item>
+    </mat-list>
+    <form #f="ngForm" (ngSubmit)="submit()" *ngIf="userService.user.role == 1">
+      <mat-form-field>
+        <textarea matInput placeholder="Alkatrész leírása" matTextareaAutosize matAutosizeMinRows="2"
+                  matAutosizeMaxRows="5" [(ngModel)] = "model.name" required></textarea>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="number" [(ngModel)] = "model.price" required min="1" placeholder="Ár" value="Sushi">
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" [disabled]="!f.valid">Alkatrész hozzáadása</button>
+    </form>
+    <button mat-raised-button color="secondary" (onclick)="back()">Vissza</button>
+  </div>
+</div>

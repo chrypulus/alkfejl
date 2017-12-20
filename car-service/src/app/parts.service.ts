@@ -32,7 +32,7 @@ export class PartsService {
   }
 
   updatePart( p : Part) : Observable<Part> {
-    return this.http.put<Part>(`http://localhost:4200/api/parts/${id}`, p, httpOptions);
+    return this.http.put<Part>(`http://localhost:4200/api/parts/${p.id}`, p, httpOptions);
   }
 
   deletePart( p : Part ) : Observable<Part> {

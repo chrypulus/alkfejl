@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Worksheet } from './worksheet';
-import { WORKSHEETS } from './mock/mock-worksheet';
 import { Reservation } from './reservation';
 import { HttpClient } from '@angular/common/http/src/client';
 import { HttpHeaders } from '@angular/common/http';
@@ -26,7 +25,7 @@ export class WorksheetService {
   }
 
   getWorksheet( id : number ) : Observable<Worksheet> {
-    return this.http.get<Worksheet>(`http://localhost:4200/api/worksheet/${r.id}`);
+    return this.http.get<Worksheet>(`http://localhost:4200/api/worksheet/${id}`);
   }
 
   updateWorksheet( r : Worksheet ) : Observable<Worksheet> {

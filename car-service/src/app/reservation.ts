@@ -10,4 +10,5 @@ export class Reservation{
     category : Category;
     comment : string;
     id : number;
+    wsid : number;
 }
