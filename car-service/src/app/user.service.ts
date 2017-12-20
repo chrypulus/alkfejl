@@ -1,76 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import {USERS} from './mock/mock-users';
 import { User } from './user';
 import { Role } from './role';
+import { HttpClient } from '@angular/common/http/src/client';
+import { HttpHeaders } from '@angular/common/http/src/headers';
+import { tap } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class UserService {
-  private currentUser : User = null;
-  private users : User[] = [];
-  constructor() {
-    this.loadUsers();
-  }
+  userUrl = "http://localhost:4200/api/user";
+  isLoggedIn : boolean = false;
+  user : User;
 
-  private loadUsers() : void {
-    this.users = USERS;
-  }
-
-  login(username : string, password : string) : boolean {
-    for(let user of this.users){
-      if(user.username == username && user.password == password){
-        this.currentUser = user;
-        return true;
-      }
-    }
-    return false;
-  }
-
-  logout(){
-    this.currentUser = null;
-  }
-
-  isLoggedIn() : boolean {
-    return this.currentUser != null;
-  }
-
-  getCurrentUser() : Observable<User> {
-    return of(this.currentUser);
-  }
-
-  getUserName() : Observable<string> {
-    return of(this.currentUser.name);
-  }
-
-  getUserType() : Observable<Role> {
-    return of(this.currentUser.role);
-  }
+  constructor(private http : HttpClient) { }
 
   getUsers() : Observable<User[]> {
-    return of(this.users);
+    return this.http.get<User[]>(this.userUrl);
   }
 
-  getWorkers() : Observable<User[]> {
-    let workers = [];
-    for(let worker of this.users){
-      if(worker.role == Role.WORKER){
-        workers.push(worker);
-      }
-    }
-    return of(workers);
+  register(user: User) {
+    return this.http.post('/api/users/register', user);
   }
 
-  registerUser(newUser : User) : Observable<boolean> {
-    let ok = true;
-    for(let user of this.users){
-      if(user.username == newUser.username){
-        ok = false;
-        break;
-      }
-    }
-    this.users.push(newUser);
-    return of(ok);
+  login(user: User): Promise<User> {
+    return this.http.post<User>('api/user/login', user, httpOptions).pipe(
+      tap((res: User) => {
+        console.log('service login', res);
+        this.isLoggedIn = true;
+        this.user = res;
+      })
+    ).toPromise();
+  }
+
+  logout() {
+    return this.http.post('api/user/logout', {}, httpOptions).pipe(
+      tap(res => {
+        console.log('service logout', res);
+        this.isLoggedIn = false;
+        this.user = new User();
+      })
+    ).toPromise();
   }
 
 }

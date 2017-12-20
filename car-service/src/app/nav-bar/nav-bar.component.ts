@@ -9,10 +9,7 @@ import { Role } from '../role';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  private user : User;
-  constructor(private userService : UserService) {
-    this.userService.getCurrentUser().subscribe(currentUser => this.user = currentUser);
-  }
+  constructor(private userService : UserService) { }
 
   ngOnInit() {
   }

@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ReservationsService } from './reservations.service';
 import { ReservationComponent } from './reservation/reservation.component';
+import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -19,7 +19,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { NewReservationComponent } from './new-reservation/new-reservation.component';
 import { ReslistComponent } from './reslist/reslist.component';
 import { NewwsComponent } from './newws/newws.component';
-
+import { PartsService } from './parts.service';
+import { MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule,
+  MatFormFieldModule, MatInputModule,
+  MatButtonToggleModule, MatListModule
+} from "@angular/material";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,14 +40,27 @@ import { NewwsComponent } from './newws/newws.component';
     NewReservationComponent,
     ReslistComponent,
     NewwsComponent
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatButtonToggleModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [ReservationsService, UserService, WorksheetService],
+  providers: [ReservationsService, UserService, WorksheetService, PartsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,8 @@ import { User } from '../user';
 import { Role } from '../role';
 import { Calendar } from '../calendar';
 import { Category } from '../category';
+import { Observable } from 'rxjs/Observable';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-reservation',
@@ -13,85 +15,47 @@ import { Category } from '../category';
   styleUrls: ['./new-reservation.component.css']
 })
 export class NewReservationComponent implements OnInit {
-  private model : Reservation = new Reservation(null, null, null, null, null);
-  private users : User[] = [];
-  private reservations : Reservation[];
-  cal : Calendar = new Calendar();
-  selectedDay : Date = null;
-  days : Date[];
-  ok : boolean = false;
-  saved : boolean = false;
+  model = new Reservation();
+  reservations = [];
+  filteredReservations = [];
+  users = [];
+  workers = [];
+  location : Location;
 
-  constructor(private reservationsService : ReservationsService, private userService : UserService) {
-    this.getUsers();
-    this.getReservations();
-    this.userService.getCurrentUser().subscribe(currentUser => this.model.partner = currentUser);
-  }
+  constructor(private reservationsService : ReservationsService, private userService : UserService) { }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+      this.filterWorkers();
+    });
+    this.reservationsService.getReservations().subscribe(res => {
+      this.reservations = res;
+      this.filterReservations();
+    });
   }
 
-  getUsers() : void {
-    this.userService.getUsers().subscribe(users => this.users = users);
+  filterWorkers() {
+    this.workers = this.users.filter(user => user.role == Role.WORKER);
   }
 
-  getReservations() : void {
-    this.reservationsService.getReservations().subscribe(reservations => this.reservations = reservations);
+  filterReservations() {
+    if(this.model.worker != null)
+    this.filteredReservations = this.reservations.filter(r => r.worker == this.model.worker);
   }
 
-  getWorkers() : User[] {
-    let workers = [];
-    for(let user of this.users){
-      if (user.role == Role.WORKER){
-        workers.push(user);
-      }
+  notReservedDay = (d: Date): boolean => {
+    //const day = d.getDate();
+    //const month = d.getMonth();
+    if(this.model.worker == null)return false;
+    for(let fr of this.filteredReservations){
+      if(fr.appointment == d)return false;
     }
-    return workers;
+    return true;
   }
 
-  setWorker(w : User) : void {
-    this.model.worker = w;
-    this.days = this.cal.getDays();
-  }
-
-  calendarClicked(d : Date) : void {
-    this.selectedDay = d;
-    this.model.appointment = d;
-  }
-
-  freeDays() : Date[] {
-    let fd = [];
-    for(let d of this.cal.getDays()){
-      if(!this.isReserved(d)){
-        fd.push(d);
-      }
-    }
-    return fd;
-  }
-
-  setCategory(c : Category){
-    this.model.category = c;
-  }
-
-  save() : void {
-    this.reservationsService.saveReservation(this.model);
-    this.saved = true;
-  }
-
-  getCategory() : string{
-    var cat;
-    if(this.model.category == Category.MALFUNCTION)cat="Meghibásodás";
-    if(this.model.category == Category.MOT)cat="Műszaki vizsga";
-    if(this.model.category == Category.MANDATORY)cat="Kötelező szervíz";
-    return cat;
-  }
-
-  isReserved(d : Date) : boolean {
-    for(let res of this.reservations){
-      if(res.appointment.getTime() == d.getTime() && res.worker == this.model.worker){
-        return true;
-      }
-    }
-    return false;
+  submit() : void {
+    let ob = this.reservationsService.addReservation(this.model);
+    ob.subscribe(reservation => this.location.back());
   }
 }

@@ -3,6 +3,8 @@ import { User } from '../user';
 import { Role } from '../role';
 import { UserService } from '../user.service';
 import { log } from 'util';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router/src/router';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +12,25 @@ import { log } from 'util';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model = new User("", "", "", -1, "", "", null);
-  loginError = false;
-  loggedin = false;
+  model = new User();
+  message = "";
 
-  onSubmit() : void {
-    if(!this.userService.login(this.model.username, this.model.password)){
-      this.loginError = true;
-    } else {
-      this.loggedin = true;
+  async onSubmit(form: NgForm) {
+    if (form.invalid) return;
+    try {
+      this.message = "Bejelentkezés folyamatban...";
+      await this.userService.login(this.model);
+      this.router.navigateByUrl("/home");
+    }
+    catch (err) {
+      this.message = "A bejelentkezés nem sikerült!";
+      console.log(err);
     }
   }
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService,
+              private router : Router) { }
 
   ngOnInit() {
   }
 
-  getUserName() : string {
-    var username;
-    this.userService.getUserName().subscribe(name => username = name);
-    return username;
-  }
-
-  getUserType() : Role {
-    var type;
-    this.userService.getUserType().subscribe(role => type = role);
-    return type;
-  }
 }

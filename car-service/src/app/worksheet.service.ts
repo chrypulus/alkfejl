@@ -4,35 +4,36 @@ import { of } from 'rxjs/observable/of';
 import { Worksheet } from './worksheet';
 import { WORKSHEETS } from './mock/mock-worksheet';
 import { Reservation } from './reservation';
+import { HttpClient } from '@angular/common/http/src/client';
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class WorksheetService {
-  private worksheets : Worksheet[] = [];
-  private currentWS : Worksheet;
+  url = "http://localhost:4200/api/worksheet";
 
-  constructor() {
-    this.load();
-  }
-
-  load() : void {
-    this.worksheets = WORKSHEETS;
-  }
+  constructor(private http : HttpClient) {}
 
   getWorksheets() : Observable<Worksheet[]> {
-    return of(this.worksheets);
+    return this.http.get<Worksheet[]>(this.url);
   }
 
-  addWorksheet(ws : Worksheet) : void {
-    this.worksheets.push(ws);
+  addWorksheet( r : Worksheet) : Observable<Worksheet> {
+    return this.http.post<Worksheet>(`http://localhost:4200/api/worksheet`, r, httpOptions);
   }
 
-  getWSbyReservation(res : Reservation) : Worksheet {
-    for(let ws of this.worksheets){
-      if(ws.partner == res.partner && ws.worker == res.worker && res.appointment == ws.appointment){
-        return ws;
-      }
-    }
-    return null;
+  getWorksheet( id : number ) : Observable<Worksheet> {
+    return this.http.get<Worksheet>(`http://localhost:4200/api/worksheet/${r.id}`);
   }
 
+  updateWorksheet( r : Worksheet ) : Observable<Worksheet> {
+    return this.http.put<Worksheet>(`http://localhost:4200/api/worksheet/${r.id}`, r, httpOptions);
+  }
+
+  deleteWorksheet( r : Worksheet ) : Observable<Worksheet> {
+    return this.http.delete<Worksheet>(`http://localhost:4200/api/worksheet/${r.id}`);
+  }
 }

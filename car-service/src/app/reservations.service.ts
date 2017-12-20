@@ -3,36 +3,36 @@ import { Reservation } from './reservation';
 import { RESERVATIONS } from './mock/mock-reservations';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class ReservationsService {
-  private reservations : Reservation[];
-  private id = 0;
-  generateId() : number {
-    this.id++;
-    return this.id;
-  }
-  private load(){
-    for(let r of RESERVATIONS){
-      this.saveReservation(r);
-    }
-  }
-  constructor() {
-    //this.load();
-  }
+  url = "http://localhost:4200/api/reservation";
+
+  constructor(private http : HttpClient) {}
 
   getReservations() : Observable<Reservation[]> {
-    return of(this.reservations);
+    return this.http.get<Reservation[]>(this.url);
   }
 
-  saveReservation(r : Reservation) : void {
-    let res = new Reservation();
-    res.partner = r.partner;
-    res.worker = r.worker;
-    res.appointment = r.appointment;
-    res.category = r.category;
-    res.comment = r.comment;
-    res.id = this.generateId();
-    this.reservations.push(res);
+  addReservation( r : Reservation) : Observable<Reservation> {
+    return this.http.post<Reservation>(`http://localhost:4200/api/reservation`, r, httpOptions);
   }
+
+  getReservation( id : number ) : Observable<Reservation> {
+    return this.http.get<Reservation>(`http://localhost:4200/api/reservation/${r.id}`);
+  }
+
+  updateReservation( r : Reservation ) : Observable<Reservation> {
+    return this.http.put<Reservation>(`http://localhost:4200/api/reservation/${r.id}`, r, httpOptions);
+  }
+
+  deleteReservation( r : Reservation ) : Observable<Reservation> {
+    return this.http.delete<Reservation>(`http://localhost:4200/api/reservation/${r.id}`);
+  }
+
 }

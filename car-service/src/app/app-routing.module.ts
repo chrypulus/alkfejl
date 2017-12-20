@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { NewReservationComponent } from './new-reservation/new-reservation.component';
+import { ReslistComponent } from './reslist/reslist.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'list', component: ListComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'newreservation', component: NewReservationComponent},
+  { path: 'list/reservation', component: ReslistComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
 ];

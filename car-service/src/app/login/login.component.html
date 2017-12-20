@@ -1,7 +1,7 @@
-<div *ngIf="!loggedin" class = "container">
+<div class = "container">
   <h1>Bejelentkezés</h1>
-
-  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+  <form  #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    {{message}}
     <div class="form-group">
       <label from="username">Felhasználó neve</label>
       <input type="text" class="form-control" id="username" required
@@ -23,10 +23,4 @@
         Rossz felhasználónév vagy jelszó!
     </div>
   </form>
-</div>
-
-<div *ngIf="loggedin" class = "container">
-  <div class="jumbotron">
-    <h1>Üdvözöllek {{getUserName()}}!</h1>  
-  </div>
 </div>
