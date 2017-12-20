@@ -1,4 +1,5 @@
 <form #f="ngForm" (ngSubmit)="submit()" (reset)="reset()">
+  <h2>Új foglalás</h2>
   <mat-form-field>
     <mat-select placeholder="Dolgozó" [(ngModel)]="model.worker" required>
       <mat-option *ngFor="let w of workers" [value]="w">
