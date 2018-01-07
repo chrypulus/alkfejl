@@ -2,6 +2,7 @@ package hu.elte.alkfejl.alkfejl.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,4 +32,7 @@ public class Worksheet implements Serializable {
     
     @ManyToMany(mappedBy = "worksheet")
     private List<Parts> parts;
+    
+    @Column(nullable = false)
+    private Reservation reservation;
 }

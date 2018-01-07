@@ -41,6 +41,9 @@ public class Reservation implements Serializable {
     @Column(nullable = true)
     private String comment;
     
+    @OneToOne(targetEntity = Worksheet.class)
+    private Worksheet worksheet;
+    
     public enum Category {
         MANDATORY, MOT, MALFUNCTION
     }
