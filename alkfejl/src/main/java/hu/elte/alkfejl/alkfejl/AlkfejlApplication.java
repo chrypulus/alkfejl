@@ -1,6 +1,7 @@
 package hu.elte.alkfejl.alkfejl;
 
 
+import hu.elte.alkfejl.alkfejl.repository.PartsRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

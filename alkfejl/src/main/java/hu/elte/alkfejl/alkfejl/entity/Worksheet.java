@@ -33,6 +33,6 @@ public class Worksheet implements Serializable {
     @ManyToMany(mappedBy = "worksheet")
     private List<Parts> parts;
     
-    @Column(nullable = false)
+    @OneToOne(targetEntity = Reservation.class)
     private Reservation reservation;
 }

@@ -8,13 +8,19 @@ import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.service.WorksheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/worksheet")
 public class WorksheetController {
     
     @Autowired
@@ -24,7 +30,7 @@ public class WorksheetController {
     private UserService userService;
     
     @Role({WORKER, ADMIN})
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<Iterable<Worksheet>> list() {
         return ResponseEntity.ok(worksheetService.listByName(userService.getLoggedInUser()));
     }
