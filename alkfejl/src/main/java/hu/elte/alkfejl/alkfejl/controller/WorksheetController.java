@@ -30,13 +30,13 @@ public class WorksheetController {
     private UserService userService;
     
     @Role({WORKER, ADMIN})
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Iterable<Worksheet>> list() {
         return ResponseEntity.ok(worksheetService.listByName(userService.getLoggedInUser()));
     }
     
     @Role({ADMIN, WORKER})
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Worksheet> create(@RequestBody Worksheet worksheet) {
         return ResponseEntity.ok(worksheetService.create(worksheet, userService.getLoggedInUser()));
     }

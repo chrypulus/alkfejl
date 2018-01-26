@@ -30,13 +30,13 @@ public class ReservationController {
     private UserService userService;
     
     @Role({WORKER, PARTNER, ADMIN})
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<Iterable<Reservation>> list() {
         return ResponseEntity.ok(reservationService.listByRole(userService.getLoggedInUser()));
     }
     
     @Role({ADMIN, WORKER, PARTNER})
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Reservation> create(@RequestBody Reservation reservation) {
         return ResponseEntity.ok(reservationService.create(reservation, userService.getLoggedInUser()));
     }

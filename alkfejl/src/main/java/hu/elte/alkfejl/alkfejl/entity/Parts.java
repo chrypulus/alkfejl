@@ -33,11 +33,6 @@ public class Parts implements Serializable {
     @Column(nullable = false)
     private int price;
     
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Part_Worksheet", 
-        joinColumns = { @JoinColumn(name = "part_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "worksheet_id") }
-    )
+    @ManyToMany(targetEntity=Worksheet.class)
     private List<Worksheet> worksheet;
 }
