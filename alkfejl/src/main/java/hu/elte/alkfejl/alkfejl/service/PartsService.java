@@ -6,10 +6,8 @@ import hu.elte.alkfejl.alkfejl.repository.PartsRepository;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Service
-@SessionScope
 public class PartsService {
     
     @Autowired

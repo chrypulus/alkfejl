@@ -1,5 +1,6 @@
 package hu.elte.alkfejl.alkfejl.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -35,5 +36,6 @@ public class Worksheet implements Serializable {
     private List<Parts> parts;
     
     @OneToOne(targetEntity = Reservation.class)
+    @JsonIgnore
     private Reservation reservation;
 }

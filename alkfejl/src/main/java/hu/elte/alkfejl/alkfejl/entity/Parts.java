@@ -34,5 +34,6 @@ public class Parts implements Serializable {
     private int price;
     
     @ManyToMany(targetEntity=Worksheet.class)
+    @JsonIgnore
     private List<Worksheet> worksheet;
 }

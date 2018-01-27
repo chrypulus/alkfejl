@@ -1,5 +1,6 @@
 package hu.elte.alkfejl.alkfejl.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -44,6 +45,7 @@ public class Reservation implements Serializable {
     
     @OneToOne(targetEntity = Worksheet.class)
     @JoinColumn
+    @JsonIgnore
     private Worksheet worksheet;
     
     public enum Category {

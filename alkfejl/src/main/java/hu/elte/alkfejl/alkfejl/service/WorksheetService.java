@@ -6,10 +6,8 @@ import hu.elte.alkfejl.alkfejl.repository.WorksheetRepository;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Service
-@SessionScope
 public class WorksheetService {
 
     @Autowired
@@ -38,7 +36,8 @@ public class WorksheetService {
         return worksheetRepository.save(worksheet);
     }
 
-    public Iterable<Worksheet> listByName(User partner) {
+    public Iterable<Worksheet> listByRole(User partner) {
+        /*
         User.Role role = partner.getRole();
         if (null != role) switch (role) {
             case PARTNER:
@@ -51,6 +50,8 @@ public class WorksheetService {
                 break;
         }
         return Collections.emptyList();
+        */
+        return worksheetRepository.findAll();
     }
 
     public Worksheet getById(long id) {

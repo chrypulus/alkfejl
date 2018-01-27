@@ -7,10 +7,8 @@ import hu.elte.alkfejl.alkfejl.repository.ReservationRepository;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
 
 @Service
-@SessionScope
 public class ReservationService {
 
     @Autowired
@@ -43,6 +41,7 @@ public class ReservationService {
     }
 
     public Iterable<Reservation> listByRole(User partner) {
+        /*
         Role role = partner.getRole();
         if (null != role) switch (role) {
             case PARTNER:
@@ -55,6 +54,8 @@ public class ReservationService {
                 break;
         }
         return Collections.emptyList();
+        */
+        return reservationRepository.findAll();
     }
     
 }

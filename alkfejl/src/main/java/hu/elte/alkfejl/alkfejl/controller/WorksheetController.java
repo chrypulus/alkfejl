@@ -32,7 +32,7 @@ public class WorksheetController {
     @Role({WORKER, ADMIN})
     @GetMapping("")
     public ResponseEntity<Iterable<Worksheet>> list() {
-        return ResponseEntity.ok(worksheetService.listByName(userService.getLoggedInUser()));
+        return ResponseEntity.ok(worksheetService.listByRole(userService.getLoggedInUser()));
     }
     
     @Role({ADMIN, WORKER})
