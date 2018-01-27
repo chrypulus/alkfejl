@@ -30,6 +30,12 @@ public class PartsController {
     private WorksheetService worksheetService;
     
     @Role({WORKER, ADMIN})
+    @GetMapping("")
+    public ResponseEntity<Iterable<Parts>> listAll() {
+        return ResponseEntity.ok(partsService.listAll());
+    }
+    
+    @Role({WORKER, ADMIN})
     @GetMapping("/list/{id}")
     public ResponseEntity<Iterable<Parts>> list(@PathVariable long id) {
         return ResponseEntity.ok(partsService.listByWorksheet(worksheetService.getById(id)));

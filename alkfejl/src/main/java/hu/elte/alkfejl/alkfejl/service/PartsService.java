@@ -42,4 +42,7 @@ public class PartsService {
         return partsRepository.findAllByWorksheet(worksheet);
     }
     
+    public Iterable<Parts> listAll() {
+        return partsRepository.findAll();
+    }
 }

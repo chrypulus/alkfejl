@@ -7,5 +7,4 @@ import org.springframework.data.repository.CrudRepository;
 public interface PartsRepository extends CrudRepository<Parts, Long>{
 
     public Iterable<Parts> findAllByWorksheet(Worksheet worksheet);
-    
 }
