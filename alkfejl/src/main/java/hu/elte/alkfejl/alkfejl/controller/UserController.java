@@ -1,7 +1,11 @@
 package hu.elte.alkfejl.alkfejl.controller;
 
+import hu.elte.alkfejl.alkfejl.annotation.Role;
 import hu.elte.alkfejl.alkfejl.service.UserService;
 import hu.elte.alkfejl.alkfejl.entity.User;
+import static hu.elte.alkfejl.alkfejl.entity.User.Role.ADMIN;
+import static hu.elte.alkfejl.alkfejl.entity.User.Role.PARTNER;
+import static hu.elte.alkfejl.alkfejl.entity.User.Role.WORKER;
 import hu.elte.alkfejl.alkfejl.exception.UserNotValidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +42,24 @@ public class UserController {
         }
     }
 	
+    @Role({WORKER, PARTNER, ADMIN})
+    @GetMapping("/users")
+    public ResponseEntity<Iterable<User>> listAll() {
+        return ResponseEntity.ok(userService.getAll());
+    }
+    
+    @Role({WORKER, PARTNER, ADMIN})
+    @GetMapping("/workers")
+    public ResponseEntity<Iterable<User>> listWorkers() {
+        return ResponseEntity.ok(userService.getWorkers());
+    }
+    
+    @Role({WORKER, PARTNER, ADMIN})
+    @GetMapping("/partners")
+    public ResponseEntity<Iterable<User>> listPartners() {
+        return ResponseEntity.ok(userService.getPartners());
+    }
+    
     @PostMapping("/register")
     public User register(@RequestBody User user) {
         return userService.register(user);

@@ -45,7 +45,6 @@ public class Reservation implements Serializable {
     
     @OneToOne(targetEntity = Worksheet.class)
     @JoinColumn
-    @JsonIgnore
     private Worksheet worksheet;
     
     public enum Category {
