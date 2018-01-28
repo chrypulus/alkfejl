@@ -51,8 +51,8 @@ public class ReservationController {
 
     @Role({ADMIN, WORKER, PARTNER})
     @PutMapping("/{id}")
-    private ResponseEntity<Reservation> update(@PathVariable long id, @RequestBody Reservation reservation, @RequestBody Worksheet worksheet) {
-        Reservation updated = reservationService.update(id, reservation, worksheet);
+    private ResponseEntity<Reservation> update(@PathVariable long id, @RequestBody Reservation reservation) {
+        Reservation updated = reservationService.update(id, reservation);
         return ResponseEntity.ok(updated);
     }
 

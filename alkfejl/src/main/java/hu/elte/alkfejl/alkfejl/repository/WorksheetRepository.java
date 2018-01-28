@@ -7,5 +7,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface WorksheetRepository extends CrudRepository<Worksheet, Long>{
     Iterable<Worksheet> findAllByPartner(User partner);
-    Worksheet findByReservation(Reservation reservation);
 }

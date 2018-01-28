@@ -23,7 +23,7 @@ public class ReservationService {
         return reservationRepository.findOne(id);
     }
 
-    public Reservation update(long id, Reservation reservation, Worksheet worksheet) {
+    public Reservation update(long id, Reservation reservation) {
         Reservation currentReservation = reservationRepository.findOne(id);
 
         currentReservation.setPartner(reservation.getPartner());
@@ -31,13 +31,6 @@ public class ReservationService {
         currentReservation.setWorker(reservation.getWorker());
         currentReservation.setCategory(reservation.getCategory());
         currentReservation.setComment(reservation.getComment());
-        
-        Worksheet currentWorksheet = worksheetRepository.findByReservation(currentReservation);
-        
-        currentWorksheet.setPartner(worksheet.getPartner());
-        currentWorksheet.setWorker(worksheet.getWorker());
-        currentWorksheet.setParts(worksheet.getParts());
-        worksheetRepository.save(currentWorksheet);
         
         return reservationRepository.save(currentReservation);
     }
