@@ -3,7 +3,9 @@ package hu.elte.alkfejl.alkfejl.service;
 import hu.elte.alkfejl.alkfejl.entity.Reservation;
 import hu.elte.alkfejl.alkfejl.entity.User;
 import hu.elte.alkfejl.alkfejl.entity.User.Role;
+import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.repository.ReservationRepository;
+import hu.elte.alkfejl.alkfejl.repository.WorksheetRepository;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +16,14 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
     
+    @Autowired
+    private WorksheetRepository worksheetRepository;
     
     public Reservation read(long id) {
         return reservationRepository.findOne(id);
     }
 
-    public Reservation update(long id, Reservation reservation) {
+    public Reservation update(long id, Reservation reservation, Worksheet worksheet) {
         Reservation currentReservation = reservationRepository.findOne(id);
 
         currentReservation.setPartner(reservation.getPartner());
@@ -27,7 +31,14 @@ public class ReservationService {
         currentReservation.setWorker(reservation.getWorker());
         currentReservation.setCategory(reservation.getCategory());
         currentReservation.setComment(reservation.getComment());
-
+        
+        Worksheet currentWorksheet = worksheetRepository.findByReservation(currentReservation);
+        
+        currentWorksheet.setPartner(worksheet.getPartner());
+        currentWorksheet.setWorker(worksheet.getWorker());
+        currentWorksheet.setParts(worksheet.getParts());
+        worksheetRepository.save(currentWorksheet);
+        
         return reservationRepository.save(currentReservation);
     }
 
@@ -57,5 +68,4 @@ public class ReservationService {
         */
         return reservationRepository.findAll();
     }
-    
 }

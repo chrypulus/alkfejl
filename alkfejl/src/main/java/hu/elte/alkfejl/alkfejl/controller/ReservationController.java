@@ -6,6 +6,7 @@ import hu.elte.alkfejl.alkfejl.entity.Reservation;
 import static hu.elte.alkfejl.alkfejl.entity.User.Role.ADMIN;
 import static hu.elte.alkfejl.alkfejl.entity.User.Role.PARTNER;
 import static hu.elte.alkfejl.alkfejl.entity.User.Role.WORKER;
+import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +51,8 @@ public class ReservationController {
 
     @Role({ADMIN, WORKER, PARTNER})
     @PutMapping("/{id}")
-    private ResponseEntity<Reservation> update(@PathVariable long id, @RequestBody Reservation reservation) {
-        Reservation updated = reservationService.update(id, reservation);
+    private ResponseEntity<Reservation> update(@PathVariable long id, @RequestBody Reservation reservation, @RequestBody Worksheet worksheet) {
+        Reservation updated = reservationService.update(id, reservation, worksheet);
         return ResponseEntity.ok(updated);
     }
 

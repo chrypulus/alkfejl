@@ -3,7 +3,6 @@ package hu.elte.alkfejl.alkfejl.service;
 import hu.elte.alkfejl.alkfejl.entity.User;
 import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.repository.WorksheetRepository;
-import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
