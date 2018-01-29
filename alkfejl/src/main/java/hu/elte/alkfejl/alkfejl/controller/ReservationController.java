@@ -39,6 +39,7 @@ public class ReservationController {
     @Role({ADMIN, WORKER, PARTNER})
     @PostMapping("")
     public ResponseEntity<Reservation> create(@RequestBody Reservation reservation) {
+        //System.out.println("\n\nReservation request arrived");
         return ResponseEntity.ok(reservationService.create(reservation, userService.getLoggedInUser()));
     }
     

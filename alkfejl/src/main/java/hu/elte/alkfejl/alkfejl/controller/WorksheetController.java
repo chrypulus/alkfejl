@@ -4,6 +4,8 @@ import hu.elte.alkfejl.alkfejl.service.UserService;
 import hu.elte.alkfejl.alkfejl.annotation.Role;
 import static hu.elte.alkfejl.alkfejl.entity.User.Role.ADMIN;
 import static hu.elte.alkfejl.alkfejl.entity.User.Role.WORKER;
+
+import hu.elte.alkfejl.alkfejl.entity.Parts;
 import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.service.WorksheetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +49,38 @@ public class WorksheetController {
         Worksheet read = worksheetService.read(Integer.parseInt(id));
         return ResponseEntity.ok(read);
     }
-
+    
     @Role({ADMIN, WORKER})
     @PutMapping("/{id}")
     private ResponseEntity<Worksheet> update(@PathVariable long id, @RequestBody Worksheet worksheet) {
         Worksheet updated = worksheetService.update(id, worksheet);
         return ResponseEntity.ok(updated);
     }
+    
 
     @Role({ADMIN, WORKER})
     @DeleteMapping("/{id}")
     private ResponseEntity delete(@PathVariable long id) {
         worksheetService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    //Alkatrész hozzáadása worksheethez
+
+    @Role({ADMIN, WORKER})
+    @PutMapping("/parts/{id}")
+    private ResponseEntity<Worksheet> addPart(@PathVariable long id, @RequestBody Parts part) {
+        System.out.println("Add part to worksheet request arrived: worksheetId: "+id +" partId: "+part.getId());
+        Worksheet updated = worksheetService.addPart(id, part);
+        return ResponseEntity.ok(updated);
+    }
+
+    //Alkatrész eltávolítása worksheetből
+
+    @Role({ADMIN, WORKER})
+    @DeleteMapping("/parts/{id}")
+    private ResponseEntity<Worksheet> deletePart(@PathVariable long id, @RequestBody Parts part) {
+        Worksheet updated = worksheetService.deletePart(id, part);
+        return ResponseEntity.ok(updated);
     }
 }

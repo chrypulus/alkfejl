@@ -1,0 +1,20 @@
+﻿Car Service Application
+
+Backend dokumentáció
+
+Végpontok:
+
+User:
+
+Reservation:
+
+Worksheet:
+
+/worksheet: listázás, létrehozás
+/worksheet/id: lekérdezés, módosítás, törlés
+/worksheet/parts/id: alkatrész hozzáadása és eltávolítása a munkalapból
+
+Part:
+
+/parts: listázás, létrehozás, módosítás
+/parts/id: lekérdezés, módosítás

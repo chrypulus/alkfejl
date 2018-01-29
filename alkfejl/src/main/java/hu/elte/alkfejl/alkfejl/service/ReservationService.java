@@ -1,11 +1,13 @@
 package hu.elte.alkfejl.alkfejl.service;
 
+import hu.elte.alkfejl.alkfejl.entity.Parts;
 import hu.elte.alkfejl.alkfejl.entity.Reservation;
 import hu.elte.alkfejl.alkfejl.entity.User;
 import hu.elte.alkfejl.alkfejl.entity.User.Role;
 import hu.elte.alkfejl.alkfejl.entity.Worksheet;
 import hu.elte.alkfejl.alkfejl.repository.ReservationRepository;
 import hu.elte.alkfejl.alkfejl.repository.WorksheetRepository;
+import java.util.ArrayList;
 import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +41,26 @@ public class ReservationService {
         reservationRepository.delete(id);
     }
 
-    public Reservation create(Reservation reservation, User partner) {
-        reservation.setPartner(partner);
-        return reservationRepository.save(reservation);
+    public Reservation create(Reservation r, User partner) {
+        //if(partner.getRole() != Role.ADMIN) {
+        //    r.setPartner(partner);
+        //}
+        Worksheet w = new Worksheet();
+        w.setPartner(r.getPartner());
+        w.setWorker(r.getWorker());
+        w.setParts(new ArrayList<Parts>());
+        w.setReservation(null);
+        //System.out.println("Worksheet to create: "+w.toString());
+        w = worksheetRepository.save(w);
+        r.setWorksheet(null);
+        r = reservationRepository.save(r);
+        //System.out.println("Worksheet created: "+w.toString());
+        r.setWorksheet(w);
+        w.setReservation(r);
+        w = worksheetRepository.save(w);
+        r = reservationRepository.save(r);
+        //System.out.println("Reservation and worksheet created: "+r.getId() + " " + r.getWorksheet().getId() + " "+w.getId());
+        return r;
     }
 
     public Iterable<Reservation> listByRole(User partner) {

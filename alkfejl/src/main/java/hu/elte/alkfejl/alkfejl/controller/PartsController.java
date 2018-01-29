@@ -67,4 +67,20 @@ public class PartsController {
         partsService.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    //Alkatrész sima létrehozása
+    @Role({ADMIN})
+    @PostMapping("")
+    public ResponseEntity<Parts> createSimple(@RequestBody Parts parts) {
+        System.out.println("Create part request arrived: " + parts.getName() + " : " + parts.getPrice());
+        return ResponseEntity.ok(partsService.createSimple(parts));
+    }
+
+    //Alkatrész sima módosítása
+    @Role({ADMIN, WORKER})
+    @PutMapping("")
+    private ResponseEntity<Parts> updateSimple(@RequestBody Parts parts) {
+        Parts updated = partsService.updateSimple(parts);
+        return ResponseEntity.ok(updated);
+    }
 }
