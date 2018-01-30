@@ -1,4 +1,5 @@
 # alkfejl
+Frontend megtalálható ezen a linken: https://github.com/chrypulus/car-service-frontend
 ## Autószerviz
 ### Készítsünk kliens-szerver rendszert, amellyel egy autószerviz bejelentkezési naptárát, valamint munkalap kezelését tudjuk elősegíteni. A partnerek időpontokat a webes felületen keresztül kérhetnek.
 * A partner regisztrálhat (név, cím, telefonszám, azonosító, jelszó megadásával), majd bejelentkezhet/kijelentkezhet. Bejelentkezést követően látható a foglalási naptár (az aktuális dátumtól), ahol szerelőnként láthatjuk a szabad, illetve foglalt időpontokat.
