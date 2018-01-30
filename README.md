@@ -35,14 +35,13 @@ Frontend megtalálható ezen a linken: https://github.com/chrypulus/car-service-
 * /reservation : listázás, létrehozás
 * /reservation/{id} : kiíratás, updatelés, törlés
 #### Parts:
-* /parts/list/{id} : kilistázza az alkatrészeket, adott worksheet szerint
-* /parts/create/{id} : hozzáad worksheethez alaktrészt
-* /parts/{id} : kiír, updatel, töröl
+* /parts: listázás, létrehozás, módosítás
+* /parts/id: lekérdezés, módosítás
 #### Worksheet:
 * /worksheet : listázás, létrehozás
 * /worksheet/{id} : kiíratás, updatelés, törlés
+* /worksheet/parts/id: alkatrész hozzáadása és eltávolítása a munkalapból
 
 ### Adatbázis
-
 
 ![UML](uml2.jpg)
